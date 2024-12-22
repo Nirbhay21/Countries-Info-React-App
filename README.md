@@ -1,5 +1,4 @@
-
-# Countries Information React App
+# 🌍 Countries Information React App
 
 A React-based application that provides detailed information about countries. The app allows users to search and explore different countries, displaying essential data like population, languages, flags, currencies, and more. This project is designed to offer an interactive and informative experience. Check out the live version of the project: [Countries Information React App](https://countries-information-react-app.netlify.app/)
 
@@ -14,7 +13,8 @@ A React-based application that provides detailed information about countries. Th
 ## Technologies Used
 
 - **React**: For building the user interface and managing state.
-- **CSS**: For styling the components and creating a responsive layout.
+- **Tailwind CSS**: For styling the components with utility-first CSS classes.
+- **CSS**: For additional custom styling and responsive layout.
 - **API (Rest Countries API)**: To fetch country data.
 
 ## Installation and Usage
