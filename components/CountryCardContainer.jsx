@@ -3,11 +3,11 @@ import CountryCard from "./CountryCard";
 import ShimmerEffectCard from "./ShimmerEffectCard";
 
 export default function CountryCardContainer({ filterRegion, searchName }) {
-    const [countriesData, setCountriesData] = useState(JSON.parse(localStorage.getItem("countriesData")));
+    const [countriesData, setCountriesData] = useState(null);
 
     let filteredCountries = countriesData;
 
-    if (filterRegion || searchName) {
+    if (countriesData && (filterRegion || searchName)) {
         filteredCountries = countriesData.filter((country) => {
             if (filterRegion !== "") {
                 return country.continents.includes(filterRegion);
@@ -20,19 +20,17 @@ export default function CountryCardContainer({ filterRegion, searchName }) {
     }
 
     useEffect(() => {
-        if (!countriesData) {
-            fetch("https://restcountries.com/v3.1/all?")
-                .then((res) => res.json())
-                .then((data) => {
-                    setCountriesData(data);
-                    localStorage.setItem("countriesData", JSON.stringify(data));
-                }).catch((error) => {
-                    console.error(error);
-                });
-        }
+        fetch("https://restcountries.com/v3.1/all?fields=name,capital,cca2,cca3,cioc,flags,region,subregion,population,continents")
+            .then((res) => res.json())
+            .then((data) => {
+                setCountriesData(data);
+                localStorage.setItem("countriesData", JSON.stringify(data));
+            }).catch((error) => {
+                console.error(error);
+            });
     }, []);
 
-    if (!filteredCountries.length) {
+    if (filteredCountries && !filteredCountries.length) {
         return (
             <div className="text-base font-semibold text-primary dark:text-dark-text-primary lg:text-lg">
                 <h2>Country not found!</h2>
@@ -52,7 +50,6 @@ export default function CountryCardContainer({ filterRegion, searchName }) {
                             region={countryData.region}
                             capital={(countryData.capital) || "No Capital"}
                             key={countryData.name.common}
-                            countryData={countryData}
                         />
                     ))
                 ) : (

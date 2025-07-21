@@ -10,8 +10,6 @@ export default function CountryDetails() {
     const params = useParams();
     const countryName = params.countryDetails;
 
-    const { state } = useLocation();
-
     function updateCountryData(newData) {
         setCountryData({
             flagImgUrl: newData.flags.png,
@@ -47,17 +45,13 @@ export default function CountryDetails() {
     }
 
     useEffect(() => {
-        if (state) {
-            updateCountryData(state);
-        } else {
-            fetch(`https://restcountries.com/v3.1/name/${countryName}`)
-                .then((res) => res.json())
-                .then(([data]) => {
-                    updateCountryData(data);
-                }).catch((error) => {
-                    setNotFound(true);
-                });
-        }
+        fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+            .then((res) => res.json())
+            .then(([data]) => {
+                updateCountryData(data);
+            }).catch((error) => {
+                setNotFound(true);
+            });
     }, [countryName]);
 
     if (notFound) {
