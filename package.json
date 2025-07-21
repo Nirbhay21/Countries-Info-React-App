@@ -1,6 +1,5 @@
 {
   "name": "Project 1_Countries rest API",
-  "main": "index.js",
   "version": "1.0.0",
   "description": "",
   "scripts": {
