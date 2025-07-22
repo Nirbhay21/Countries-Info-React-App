@@ -4,7 +4,6 @@ import ShimmerEffectCard from "./ShimmerEffectCard";
 
 export default function CountryCardContainer({ filterRegion, searchName }) {
     const [countriesData, setCountriesData] = useState(null);
-    console.log(countriesData);
 
     let filteredCountries = countriesData;
 
