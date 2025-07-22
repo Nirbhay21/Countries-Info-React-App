@@ -8,6 +8,8 @@ export default function CountryDetails() {
     const [notFound, setNotFound] = useState(false);
 
     const params = useParams();
+    const location = useLocation();
+    const countryCodes = location.state;
     const countryName = params.countryDetails;
 
     function updateCountryData(newData) {
@@ -45,7 +47,8 @@ export default function CountryDetails() {
     }
 
     useEffect(() => {
-        fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+        const { cca2, cca3, cioc } = countryCodes;
+        fetch(`https://restcountries.com/v3.1/alpha?codes=${cca2},${cca3},${cioc}`)
             .then((res) => res.json())
             .then(([data]) => {
                 updateCountryData(data);

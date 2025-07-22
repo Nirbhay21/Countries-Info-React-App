@@ -4,6 +4,7 @@ import ShimmerEffectCard from "./ShimmerEffectCard";
 
 export default function CountryCardContainer({ filterRegion, searchName }) {
     const [countriesData, setCountriesData] = useState(null);
+    console.log(countriesData);
 
     let filteredCountries = countriesData;
 
@@ -49,6 +50,11 @@ export default function CountryCardContainer({ filterRegion, searchName }) {
                             population={countryData.population.toLocaleString("en-IN")}
                             region={countryData.region}
                             capital={(countryData.capital) || "No Capital"}
+                            countryCodes={{
+                                cca2: countryData.cca2,
+                                cca3: countryData.cca3,
+                                cioc: countryData.cioc
+                            }}
                             key={countryData.name.common}
                         />
                     ))
